@@ -4,9 +4,7 @@ var dbUtils = require('./dbUtils')
 
 //dbUtils.addUser("mmd","12345+")
 
-dbUtils.startSqlDB().then(function(){
-    dbUtils.addUser("aaa","456")
-});
+dbUtils.startSqlDB();
 
 console.log("aa");
 
@@ -18,6 +16,8 @@ var options = {
 topic_s = "/IM/MSGService";
 topic_t = "/IM/ChatUser/"
 var client = mqtt.connect(mqtturl,options);
+
+
 
 client.on("message",function(topic,message,packet){
     if(topic_s==topic){
