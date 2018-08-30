@@ -5,7 +5,7 @@ var all = {
         username: 'mqt',
         password: '123456mqt',
         database: 'mqt',
-        host: "35.236.164.76",
+        host: "127.0.0.1",
         dialect: 'mysql',
         define: {
             underscored: false,
