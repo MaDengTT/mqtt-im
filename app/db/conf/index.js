@@ -2,8 +2,8 @@
 
 var all = {
     sequelize:{
-        username: 'mqt',
-        password: '123456mqt',
+        username: 'xxx',
+        password: 'xxx',
         database: 'mqt',
         host: "127.0.0.1",
         dialect: 'mysql',
