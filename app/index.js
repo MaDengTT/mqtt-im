@@ -6,8 +6,6 @@ var dbUtils = require('./dbUtils')
 
 // dbUtils.startSqlDB();
 
-console.log("aa");
-
 mqtturl = "mqtt://"+"www.mdshi.cn:1883"
 var options = {
     clientId:'nodejs-158462'
@@ -42,10 +40,9 @@ client.on("message",function(topic,message,packet){
             var from = jsonbean.tUserId;
             if(from){
                 console.log(from);
-                
                 client.publish(topic_chat+from,"12"+JSON.stringify(jsonbean),function(error){
                     if(error){
-                        console.log(error);
+                        console.log("to"+topic_chat+from+":"+error);
                     }
                 });
             }
