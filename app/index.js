@@ -41,6 +41,7 @@ client.on("message",function(topic,message,packet){
             if(from){
                 console.log(from);
                 client.publish(topic_chat+from,"12"+JSON.stringify(jsonbean),function(error){
+                    console.log("to"+topic_chat+from+":");
                     if(error){
                         console.log("to"+topic_chat+from+":"+error);
                     }
