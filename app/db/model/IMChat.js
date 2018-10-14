@@ -5,13 +5,13 @@ module.exports = function(sequelize,DataTypes){
     var IMChat = sequelize.define(
         'IMChat',
         {
-            ID:{
+            Id:{
                 field:'id',
                 primaryKey:true,
                 type:DataTypes.INTEGER,
                 autoIncrement: true
             },
-            userID:{
+            userId:{
                 field:'user_id',
                 type:DataTypes.INTEGER,
                 allowNull:false
