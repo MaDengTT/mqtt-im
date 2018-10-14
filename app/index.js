@@ -41,23 +41,33 @@ client.on("message",function(topic,message,packet){
         var msgString = msg.substr(2);
         var jsonbean = JSON.parse(msgString);
         if(key=="11"){
+            // {"content":"nnj","createTime":1539510400594,"fUserId":10016,"id":0,"other_id":10017,"session_id":1001710016,"tUserId":10017,"type":0}
             console.log(jsonbean);
             var tid = jsonbean.tUserId;
             var fid = jsonbean.fUserId;
             chatUtils.msgToDb(fid,tid,msgString,function(result){
-                console.log(result);
+                jsonbean.id = result.Id;
+                if(tid){
+                    console.log(tid);
+                    client.publish(topic_chat+tid,"12"+JSON.stringify(jsonbean),function(error){
+                        console.log("to"+topic_chat+tid+":");
+                        if(error){
+                            console.log("to"+topic_chat+tid+":"+error);
+                        }
+                    });
+                }
+                // console.log(result);
             },function(err){
                 console.log(err);
             })
-            // if(tid){
-            //     console.log(tid);
-            //     client.publish(topic_chat+tid,"12"+msgString,function(error){
-            //         console.log("to"+topic_chat+tid+":");
-            //         if(error){
-            //             console.log("to"+topic_chat+tid+":"+error);
-            //         }
-            //     });
-            // }
+        }else if(key="20"){
+            // {"id":12045}
+            chatUtils.deleateMsgToDb(jsonbean.id,function(result){
+                console.log("deleate"+result);
+            },function(err){
+                console.log(err);
+                
+            })
         }
         // var jsonbean = JSON.parse(msg);
         // dbUtils.addIMChat(jsonbean.postid,jsonbean.toid,
