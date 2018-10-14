@@ -9,7 +9,7 @@ module.exports = function(sequelize,DataTypes){
                 field:'id',
                 primaryKey:true,
                 type:DataTypes.INTEGER,
-                allowNull:true
+                autoIncrement: true
             },
             userID:{
                 field:'user_id',
@@ -30,9 +30,13 @@ module.exports = function(sequelize,DataTypes){
                 field:'to_id',
                 type:DataTypes.INTEGER
             },
-            create_time:{
+            createTime:{
                 field:'create_time',
                 type:DataTypes.DATE,
+            },
+            isSend:{
+                field:'is_send',
+                type:DataTypes.BOOLEAN,
             }
         },
         {

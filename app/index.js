@@ -1,6 +1,6 @@
 var mqtt = require('mqtt')
 
-var dbUtils = require('./dbUtils')
+var chatUtils = require("./utils/chatUtils");
 
 //dbUtils.addUser("mmd","12345+")
 
@@ -28,25 +28,36 @@ client.on('connect',function(){
         }
     })
 })
-
+/**
+ * 11 -> c -》 send -》s
+ * 12 -> s -》 send -》c
+ * 20 -> 消息收到
+ */
 client.on("message",function(topic,message,packet){
     var msg = message.toString();
     console.log(msg);
     if(topic_c==topic){
         var key = msg.substr(0,2);
-        var jsonbean = JSON.parse(msg.substr(2));
+        var msgString = msg.substr(2);
+        var jsonbean = JSON.parse(msgString);
         if(key=="11"){
             console.log(jsonbean);
-            var from = jsonbean.tUserId;
-            if(from){
-                console.log(from);
-                client.publish(topic_chat+from,"12"+JSON.stringify(jsonbean),function(error){
-                    console.log("to"+topic_chat+from+":");
-                    if(error){
-                        console.log("to"+topic_chat+from+":"+error);
-                    }
-                });
-            }
+            var tid = jsonbean.tUserId;
+            var fid = jsonbean.fUserId;
+            chatUtils.msgToDb(fid,tid,msgString,function(result){
+                console.log(result);
+            },function(err){
+                console.log(err);
+            })
+            // if(tid){
+            //     console.log(tid);
+            //     client.publish(topic_chat+tid,"12"+msgString,function(error){
+            //         console.log("to"+topic_chat+tid+":");
+            //         if(error){
+            //             console.log("to"+topic_chat+tid+":"+error);
+            //         }
+            //     });
+            // }
         }
         // var jsonbean = JSON.parse(msg);
         // dbUtils.addIMChat(jsonbean.postid,jsonbean.toid,
