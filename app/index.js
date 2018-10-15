@@ -31,7 +31,7 @@ client.on('connect',function(){
 /**
  * 11 -> c -》 send -》s
  * 12 -> s -》 send -》c
- * 20 -> 消息收到
+ * 20 -> 消息收到 从数据库删除消息
  */
 client.on("message",function(topic,message,packet){
     var msg = message.toString();
